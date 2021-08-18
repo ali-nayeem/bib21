@@ -1,0 +1,33 @@
+\section{Related Work}\label{sec:literature}
+
+Finding effective locations for emergency medical service vehicles (EMSVs) vehicles have been extensively studied in the literature. The existing works formulated their problems by extending/adapting some basic models to match the intended application's specific structure. Also, they applied a variety of methods to solve their model. In this section, we discuss the most commonly used underlying models and solution approaches. 
+
+%In those works, some basic models are tailored to meet the specific structure of the intended application. formulated their problems based on different well-known models to match the application domain's specific requirements and used a variety of methods to solve them. In this section we discuss the most commonly used models and solution approaches.
+\subsection{Problem Model}
+
+Among the well-known models, we find applications of the set covering location model~\cite{toregas1971location} in several studies~\cite{rajagopalan2008multiperiod, rajagopalan2011ambulance, shariat2012linear, saydam2013dynamic, aringhieri2016supporting}. This model finds the number and location of EMSVs necessary to cover all demand points (or a specified percentage) from within a fixed radius of the deployed EMSVs. Here the objective is to minimize the number of EMSVs or the overall location cost.
+
+Extensions of the maximal covering location model~\cite{church1974101}, which is perhaps the most common, are used in~\cite{roislien2018comparing, hatta2013solving, ingolfsson2008optimal, lim2011impact, chanta2014improving, naoum2013stochastic}. It determines the location of a specified number of EMSVs to maximize demand covered inside a given maximum coverage area. It may consider the importance/weight of demand at each point. A popular stochastic extension of this model, known as the maximum expected covering location model, seeks to maximize the \textit{expected} coverage by incorporating the probability of availability of each EMSV in the objective function. This model is adopted by~\cite{morohosi2012hypercube, van2019improving, ingolfsson2008optimal, chuang2007maximum, erdougan2010scheduling}. On the other hand, the double standard model attempts to address vehicle unavailability implicitly by maximizing the demand covered by at least two EMSVs. Some examples of its application are~\cite{schmid2010ambulance, dibene2017optimizing, lahijanian2016double, gendreau1997solving, doerner2005heuristic}.   
+
+The third type of classical model is the $ p $-median location model~\cite{hakimi1964optimum}. It is also known as the facility location-allocation model. It minimizes the total travel distance or time required to cover all demand points by a specified number of allocated EMSVs. When the EMSVs are uncapacitated, each demand point is assigned to the closest EMSV. We find the variants of this model being utilized in~\cite{pacheco2015solving, andersson2007decision, schmid2012solving, zhi2015multi, toro2013joint}.
+
+
+
+\subsection{Solution Method}
+
+Several works used mathematical programming~\cite{roislien2018comparing, van2019improving, naoum2013stochastic, zhi2015multi} to solve the problems formulated based on the models mentioned above. However, such an approach works reasonably only for small instances. So it has been used as a baseline in most of the studies. On the contrary, metaheuristic approaches are widely used to tackle realistic instances. In particular, we see the application of genetic algorithm~\cite{toro2013joint, benabdouallah2017comparison, pacheco2015solving, iannoni2009optimization}, tabu search~\cite{rajagopalan2008multiperiod, rajagopalan2011ambulance, erdougan2010scheduling, doerner2005heuristic}, ant colony optimization~\cite{doerner2005heuristic, benabdouallah2017comparison, benabdouallah2016deployment}, particle swarm optimization~\cite{hatta2013solving}, variable neighborhood search~\cite{schmid2012solving}, etc.
+
+\subsection{Possible Gaps in the Literature}
+
+\begin{itemize}
+	
+	\item A complex formulation that differentiates whether a team is Doctor/Paramedic and calculate coverage score accordingly using ISS score
+	
+	\item An examination of the effect of using simple distance measures (e.g., Euclidean, Manhattan) as a proxy for the actual road distance (e.g., Google map, Open street map)
+	
+	\item Matheuristics have not been explored
+	
+	\item Hyper-heuristics have not been explored
+	
+\end{itemize}
+

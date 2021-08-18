@@ -1,0 +1,149 @@
+
+\colorlet{lcfree}{green}
+\colorlet{lcnorm}{blue}
+\colorlet{lccong}{red}
+
+% -------------------------------------------------
+% Set up a new layer for the debugging marks, and make sure it is on
+% top
+\pgfdeclarelayer{marx}
+\pgfsetlayers{main,marx}
+% A macro for marking coordinates (specific to the coordinate naming
+% scheme used here). Swap the following 2 definitions to deactivate
+% marks.
+\providecommand{\cmark}[2][]{%
+  \begin{pgfonlayer}{marx}
+    \node [nmark] at (c#2#1) {#2};
+  \end{pgfonlayer}{marx}
+  } 
+\providecommand{\cmark}[2][]{\relax} 
+% -------------------------------------------------
+
+%\begin{figure}[h]
+
+%\centering
+% -------------------------------------------------
+% Start the picture
+%\subfloat[BB50016]{
+\resizebox{0.44\textwidth}{!}{%
+\begin{tikzpicture}[%
+    >=triangle 60,              % Nice arrows; your taste may be different
+    start chain=going below,    % General flow is top-to-bottom
+    node distance=6mm and 60mm, % Global setup of box spacing
+    every join/.style={norm},   % Default linetype for connecting boxes
+    ]
+% ------------------------------------------------- 
+% A few box styles 
+% <on chain> *and* <on grid> reduce the need for manual relative
+% positioning of nodes
+\tikzset{
+  base/.style={draw, on chain, on grid, align=center, minimum height=4ex},
+  proc/.style={base, rectangle, text width=19em},
+  proc2/.style={base, rectangle, text width=12em},
+  test/.style={base, diamond, aspect=2, text width=6em},
+  term/.style={proc, rounded corners},
+  term2/.style={proc2, rounded corners},
+  merge/.style={base, circle},
+  % coord node style is used for placing corners of connecting lines
+  coord/.style={coordinate, on chain, on grid, node distance=6mm and 25mm},
+  % nmark node style is used for coordinate debugging marks
+  nmark/.style={draw, cyan, circle, font={\sffamily\bfseries}},
+  % -------------------------------------------------
+  % Connector line styles for different parts of the diagram
+  norm/.style={->, draw, lcnorm},
+  free/.style={->, draw, lcfree},
+  cong/.style={->, draw, lccong},
+  it/.style={font={\small\itshape}}
+}
+% -------------------------------------------------
+% Start by placing the nodes
+%\node [proc, densely dotted, it] (p0) {Randomly initialize base locations};
+% Use join to connect a node to the previous one 
+\node [term, fill=lcfree!25] {Input: unaligned sequences,\\ \scriptsize{$<W_{SIMG},W_{SIMNG},W_{SOP},W_{GAP},W_{ML}>$}};
+\node [proc, join] (p0) {$iA \gets$ compute initial alignment\\$iT \gets$ infer ML tree};
+\node [proc, join,  fill=lcfree!25] (p01) {$stocDecom \gets False$};
+%\node [proc, join] (p1) {$iT \gets$ estimate ML tree};
+\node [proc, join, fill=lcfree!25] (p12) {\scriptsize{$SIMG, SIMNG, SOP, GAP, ML \gets$} calculate 5 scores from ($iA, iT$)};
+\node [proc, join, , fill=lcfree!25] (p13) {\scriptsize{$bS \gets SIMG \times W_{SIMG} + SIMNG \times W_{SIMNG} + SOP \times W_{SOP} + GAP \times W_{GAP} + ML \times W_{ML}$}};
+\node [proc, join] (p14) {($nA, nT) \gets$ run a PASTA iteration to get a new (alignment, tree) pair from ($iA, iT$)\\{~{\footnotesize\ttfamily{/*$stocDecom$  triggers the stochastic decomposition*/}}} };
+\node [proc, join, fill=lcfree!25] (p15) {\scriptsize{$SIMG, SIMNG, SOP, GAP, ML \gets$} calculate 5 scores from ($nA, nT$)};
+\node [proc, join, fill=lcfree!25] (p16) {\scriptsize{$nS \gets SIMG \times W_{SIMG} + SIMNG \times W_{SIMNG} + SOP \times W_{SOP} + GAP \times W_{GAP} + ML \times W_{ML}$}};
+%\node [proc, join, fill=lccong!25, below=1.7cm of p14] (S1) {Update base locations based on current allocations};
+%\node [proc, join, fill=lcfree!25, below=1.6cm of S1] (p41) {Calculate allocations for current bases};
+%\node [proc, join=by cong]      {Calculate objective with current base locations and allocations};
+\node [test,right=6.3cm of p0] (t1) {$(nS > bS)$?};
+% No join for exits from test nodes - connections have more complex
+% requirements
+% We continue until all the blocks are positioned
+\node [proc2] (p2) {($bA, bT) \gets (nA, nT)$\\$bS \gets nS$};
+\node [proc2, join,  fill=lcfree!25] (p24) {$stocDecom \gets False$};
+\node [proc2,  fill=lcfree!25] (p23) {$stocDecom \gets True$};
+\node [merge, join] (p21) {};
+\node [proc2, join] (p22) {($iA, iT) \gets (nA, nT)$};
+% We position the next block explicitly as the first block in the
+% second column.  The chain 'comes along with us'. The distance
+% between columns has already been defined, so we don't need to
+% specify it.
+\node [test, join] (t6) {terminate?}; %, right=8cm of S1
+%\node [test, join=by free] (t5) {Accept $S_{new}$?};
+%\node [proc, join=by free] (p5) {$S_{candidate} \gets S_{new}$};
+%\node [proc, join] (p6) {Maintain $S_{best}$};
+%\node [proc, join] (p7) {Clear $SEQ$};
+%\node [test, join] (t6) {terminate?};
+% Some more nodes specifically positioned (we could have avoided this,
+% but try it and you'll see the result is ugly).
+\node [term2, join] (p10) {Return ($bA, bT$)};
+% -------------------------------------------------
+% Now we place the coordinate nodes for the connectors with angles, or
+% with annotations. We also mark them for debugging.
+%DISABLED BY AHMED
+\node [coord, right=2.2cm of t1] (c1)  {}; %\cmark{1}   
+\node [coord, left=of t6] (c6)  {}; %\cmark{6}   
+%\node [coord, right=of t5]  (c8)  {}; %\cmark{5}  
+\node [coord, left=of t6, xshift=-17em]  (cS1)  {}; %\cmark{5}  
+
+% -------------------------------------------------
+% A couple of boxes have annotations
+%\node [above=0mm of S1, it] {(Location step: Heuristic)~~};
+%\node [above=0mm of p41, it] {(Allocation step: Exact) };
+% -------------------------------------------------
+% All the other connections come out of tests and need annotating
+% First, the straight north-south connections. In each case, we first
+% draw a path with a (consistently positioned) annotation node, then
+% we draw the arrow itself.
+\path (t1.south) to node [near start, xshift=1em] {$y$} (p2);
+  \draw [*->,lcnorm] (t1.south) -- (p2);
+%\path (t5.south) to node [near start, xshift=1em] {$y$} (p5); 
+%  \draw [*->,lcfree] (t5.south) -- (p5);
+\path (t6.south) to node [near start, xshift=1em] {$y$} (p10); 
+  \draw [*->,lcnorm] (t6.south) -- (p10);
+% -------------------------------------------------
+% Finally, the twisty connectors. Again, we place the annotation
+% first, then draw the connector
+\path (t1.east) to node [near start, yshift=1em] {$n$} (c1); 
+  \draw [*->,lcnorm] (t1.east) -- (c1) |- (p23);
+  
+\draw [->,lcnorm] (p24.west) -- ++(-4mm,0) |- (p21);
+
+
+\path (t6.west) to node [yshift=-1em] {$n$} (c6); 
+  \draw [*->,lcnorm] (t6.west) -- ++(-16mm,0)  |- (p14.east);
+
+% -------------------------------------------------
+% A last flourish which breaks all the rules
+%\draw [->,MediumPurple4, dotted, thick, shorten >=1mm]
+%  (p2.south) -- ++(5mm,-3mm)  -- ++(27mm,0) 
+%  |- node [black, near end, yshift=0.75em, it] {SM to SA} (p4);
+
+\draw [->,lcnorm]
+  (p16.south) -- ++(5mm,-3mm)  -- ++(31mm,0) 
+  |- node [black, near end, yshift=0.75em, it] {} (t1.west);
+  
+\end{tikzpicture}
+}
+%}
+%\end{adjustwidth}
+%\caption{A high-level workflow of PMAO for one weight vector.}
+%\label{fig:flowchart}
+%\end{figure}
+

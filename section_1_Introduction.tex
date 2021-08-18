@@ -1,0 +1,39 @@
+\section{Introduction}
+\label{sec:intro}
+Mulitple sequence alignment (MSA) aims to arrange more than two biological sequences such that each site in the resultant alignment holds homologous characters. The gaps placed in an aligned sequences seek to reflect the historical insertion/deletion events as close as possible. MSA is used as a basic step in several biological studies such as prediction of structure/function of newly discovered proteins, estimation of phylogeny among a group of species, etc. This paper address MSA task in the context of phylogeny estimation from sequence data which usually takes place in two phases: (i) compute an MSA (ii) infer a tree from the MSA. The characteristics of the MSA obtained in phase (i) greatly influences the correctness of phase (ii). Thus an MSA tool which is aware of its usage for phylogenetic purpose is expected to yield high-quality trees.  
+
+There are huge number of MSA methods available in the literature. We can broadly divide them into three categories: progressive, consistency-based  and iterative. This division is not exclusive as many tools also use a combination of these techniques. Among them the most flexible are the iterative methods (e.g., SAT\'e~\cite{liu2009rapid}, SAT\'e-II~\cite{liu2012sate}, PASTA~\cite{mirarab2015pasta}). They can fix errors made in the early stage of computation by repeating some steps until an optimization criterion or objective function, quantifying the quality of the realignment, converges. Due to such advantage progressive (e.g., MUSCLE~\cite{edgar2004muscle}, MAFFT~\cite{katoh2002mafft}, etc.) and consistency-based (e.g., T-COFFEE~\cite{notredame2000t}, ProbCons~\cite{do2005probcons}, etc) method also employ a iterative refinement phase at the end of their pipeline. We find the usage of various objectives (e.g., sum-of-pairs and its weighted variants, consistency score etc.) for iterative improvement of MSAs. 
+
+The usage of several different objective functions to compare candidate MSAs persuaded researchers (\cite{da2010alineaga, ortuno2013optimizing, soto2014multi, abbasi2015local, rubio2016hybrid,zambrano2017comparing, rubio2018characteristic, benitez2020sequoya}) to employ multi-objective (MO) optimization. We were motivated to explore such approach due to the fact that the alignment optimized under one objective may be different to the alignments generated under other objectives, inferring discordant
+homologies relating the sequences under consideration. MO optimization can address this issue by
+optimizing multiple conflicting objectives simultaneously to
+generate a set of alternative alignments. Also, as no single objective is biologically guaranteed to lead to the true solution, the argument of combining alternative criteria seems reasonable. However, such an approach need to be backed by the choice of appropriate objective functions and performance measures which is not addressed in the existing MO studies on MSA~\cite{nayeem2020multiobjective}.  %provide sound 
+
+
+Traditionally the MSA methods are benchmarked based on two alignment quality metrics: SP-score and TC-score~\cite{warnow2017computational}. These measures compare the estimated alignment to the reference alignment (i.e., the ground truth). In ~\cite{nayeem2020multiobjective, nayeem2019phylogeny}, the authors argued with experimental evidence that such generic measures may not be effective to choose the best MSA method to perform a specific biological purpose (e.g., protein structure prediction, phylogeny estimation, etc.). Instead, they proposed the employment of a domain-specific measure that captures in what extent the output can serve the actual purpose. Taking phylogeny estimation as the intended application, they demonstrated the advantages of using tree quality for performance evaluation as opposed to traditional measures. They developed a systematic method to identify application-aware objective functions based on their correlation to the tree accuracy. Optimizing those objectives by MO techniques can yield high-quality phylogenetic trees.
+
+%was shown to yield better phylogenetic trees than existing MSA methods.
+%to evaluate the performance of MSA methods. Furthermore, they suggested several application-aware objective functions, if simultaneously optimized through multi-objective optimization techniques, 
+
+PASTA is a state-of-the-art MSA method that exhibits better accuracy and scalability than other methods. It iteratively co-estimates both MSA and phylogenetic tree  tree till the maximum likelihood (ML) score of the newly computed (MSA, tree) pair improves. By default, the first iteration constructs an ML tree from an initial alignment as the guide tree. Each iteration consists of six steps. As the 1st step, it decomposes the set of unaligned sequences into disjoint subsets by applying \textit{mincluster} technique  on the guide tree. The 2nd step computes a spanning tree on the subsets of sequences. Next each subsets are aligned in the 3rd step to generate \textit{type-1 sub-alignments}. The 4th step aligns each pair of \textit{type-1 sub-alignments} on each edge of the spanning tree obtaining \textit{type-2 sub-alignments} which are merged using transitivity to produce the final MSA in the 5th step. In the 6th step, an ML tree is inferred from the final MSA to be used as the guide tree for the next iteration. PASTA is also termed as `meta-method' as it leverages other methods (e.g., MAFFT, FastTree-2, OPAL~\cite{}, etc.) in different steps. 
+
+PASTA, extended from SAT\'e-II, can be seen as a application-oriented aligner due to its emphasize on the phylogenetic tree. It
+makes an effort to exploit the close association between the
+accuracy of an MSA and the corresponding tree in finding
+the output through multiple iterations from both directions.
+We believe that the incorporation of more application-aware objectives can
+be particularly beneficial for PASTA and this paper makes the following contribution in this direction. 
+
+\begin{itemize}
+	\item We develop a decomposition-based MO framework, namely, PMAO (PASTA with Many\footnote{ MO literature refers more than three objectives are as \textit{many}\cite{li2015many} due to the added complexities to handle them} Application-aware Objectives), by extending PASTA to incorporate five application-aware objectives. PMAO can lead to a tree-space containing significantly better trees than PASTA. 
+
+	\item We employ a machine learning approach to demonstrate that PMAO can be used to generate a few solutions which contain at least one high quality tree. This can assist the domain expert to choose the one by manual inspection.
+	
+	\item We experiment different ways to select a single high quality solution without the use of external evidence and found that (to be completed after finalizing the results section).
+
+	
+	%\item We 
+	%\item summarize multile tree can give benefit
+\end{itemize}
+
+%In this paper, we have shown that by integrating four more application-aware objective functions into PASTA we can significantly improve the quality of the resultant phylogenetic trees. PASTA is application-oriented
