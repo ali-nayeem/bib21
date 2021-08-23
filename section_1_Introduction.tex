@@ -20,20 +20,16 @@ PASTA is a state-of-the-art MSA method that exhibits better accuracy and scalabi
 PASTA, extended from SAT\'e-II, can be seen as an application-oriented aligner 
 %due to its emphasize on the phylogenetic tree. 
 as it makes an effort to exploit the close association between the
-accuracy of a MSA and the corresponding tree in finding
-the output through multiple iterations from both directions. 
+accuracy of a MSA and the corresponding tree in finding the output through multiple iterations from both directions. 
 This further motivates us to incorporate more application-aware objectives within the internal steps of PASTA expecting that this would further improve the efficacy thereof. This paper makes the following contribution in this direction. 
 
 \begin{itemize}
 	\item We develop a decomposition-based MO framework, namely, PMAO (PASTA with Many\footnote{ MO literature refers more than three objectives are as \textit{many}\cite{li2015many} due to the added complexities to handle them} Application-aware Objectives), by extending PASTA to incorporate five application-aware objectives. PMAO can lead to a tree-space containing significantly better trees than PASTA. 
 
-	\item Due to the inherent nature of MO optimization algorithms employed therein, PMAO outputs a bunch of high-quality trees (i.e., non-dominated Pareto-optimal solutions). As part of PMAO framework, we develop a machine learning approach that can identify a small set of solutions that contain at least one high quality tree. This can assist the domain expert to easily choose the final solution through visual inspection. To the best of our knowledge, this is a unique approach to filter a large set of Pareto-optimal solutions which could be useful in other MO optimization tasks as well. 
+	\item Due to the inherent nature of MO optimization algorithms employed therein, PMAO outputs a bunch of high-quality trees (i.e., non-dominated Pareto-optimal solutions). As part of PMAO framework, we develop a machine learning approach that can identify a few solutions that contain at least one high quality tree. This can assist the domain expert to easily choose the final solution through visual inspection. To the best of our knowledge, this is a unique approach to filter a large set of Pareto-optimal solutions which could be useful in other MO optimization tasks as well. 
 	
-	\item We experiment different ways to select a single high quality solution without the use of external evidence and found that (to be completed after finalizing the results section).
+	\item We experiment two ways to obtain a single high quality solution without the use of external evidence by summarizing the few solutions detected by machine learning using greedy consensus and quartet consistency. Both of them can offer significantly better FN rates than PASTA.
 
-	
-	%\item We 
-	%\item summarize multile tree can give benefit
 \end{itemize}
 
 %In this paper, we have shown that by integrating four more application-aware objective functions into PASTA we can significantly improve the quality of the resultant phylogenetic trees. PASTA is application-oriented

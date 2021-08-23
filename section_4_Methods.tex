@@ -6,7 +6,7 @@
 		\centering
 		\subfloat[Input-output]{\includegraphics[width=0.28\textwidth]{PMAO}}%
 		\subfloat[A high-level workflow for one weight vector]{\label{fig:PMAO:flow}\input{method-flowchart-subfloat}}%
-		\subfloat[30 well-spaced weight vectors]{\label{fig:weight}\includegraphics[width=0.35\textwidth]{30-weight.pdf}}
+		\subfloat[30 well-spaced 5D weight vectors]{\label{fig:weight}\includegraphics[width=0.35\textwidth]{30-weight.pdf}}
 	\end{adjustwidth}
 	\caption{A simplified illustration of our PMAO framework.}
 	\label{fig:PMAO}
@@ -32,7 +32,7 @@ Among the several classes of MO algorithms (e.g., pareto-based, decomposition-ba
 We develop a decomposition-based MO framework, namely, PASTA with many application-aware objectives (PMAO) (Figure~\ref{fig:PMAO}) by driving the search process of PASTA with a total of five objectives directed by a 5D weight vector. Figure~\ref{fig:PMAO:flow} depicts a high-level workflow for one weight vector, where the steps inspired by the MO approach are marked as green. This workflow is executed for all weight vectors to get alternative solutions and can be performed independently in parallel. As will be evident later, PMAO treats a solution better than the other based on the weighted-sum of five objective values instead of using ML score alone. Also note that, PMAO keeps track of whether an improved solution is generated at the previous iteration through a boolean variable \textit{stocDecom}. It impacts the divide-and-conquer strategy within PASTA by enabling the stochastic decomposition which will be discussed soon. PMAO uses the default behavior of PASTA unless mentioned otherwise.
 
 \subsubsection{Weight vectors}
-Although working with a higher number of weight vectors increase the chance of getting better solutions in the solution set, we choose to work with 30 weight vectors to reduce the computational burden as well as to demonstrate the synergy between PASTA and an MO approach since 30 is quite a low number to tackle 5 objectives alone by an MO algorithm~\cite{deb2014evolutionary}. We calculate 30 well-spaced points on a 5D unit simplex using the method suggested by~\cite{ref_dirs_energy} as our weight vectors as shown in Figure~\ref{fig:weight}. %The workflow of
+Although working with a higher number of weight vectors increase the chance of getting better solutions in the solution set, we choose to work with 30 weight vectors to reduce the computational burden as well as to demonstrate the synergy between PASTA and an MO approach since 30 is quite a low number to tackle 5 objectives alone by an MO algorithm~\cite{deb2014evolutionary}. We calculate 30 well-spaced points on a 5D unit simplex using the method suggested by~\cite{ref_dirs_energy} as our weight vectors. Each of the 30 vertical bars in Figure~\ref{fig:weight} depicts one weight vector. %The workflow of
 
 \begin{algorithm}[!htbp]%[!htbp]
 	\scriptsize
