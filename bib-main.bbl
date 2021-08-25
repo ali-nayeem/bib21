@@ -6,6 +6,12 @@ Maryam Abbasi, Lu{\'\i}s Paquete, and Francisco~B Pereira.
 \newblock In {\em International Conference on Bioinformatics and Biomedical
   Engineering}, pages 175--182. Springer, 2015.
 
+\bibitem{balaban2019treecluster}
+Metin Balaban, Niema Moshiri, Uyen Mai, Xingfan Jia, and Siavash Mirarab.
+\newblock Treecluster: Clustering biological sequences using phylogenetic
+  trees.
+\newblock {\em PloS one}, 14(8):e0221068, 2019.
+
 \bibitem{benitez2020sequoya}
 Antonio Ben{\'\i}tez-Hidalgo, Antonio~J Nebro, and Jos{\'e}~F Aldana-Montes.
 \newblock Sequoya: multiobjective multiple sequence alignment in python.
@@ -16,6 +22,12 @@ J.~{Blank}, K.~{Deb}, Y.~{Dhebar}, S.~{Bandaru}, and H.~{Seada}.
 \newblock Generating well-spaced points on a unit simplex for evolutionary
   many-objective optimization.
 \newblock {\em IEEE Transactions on Evolutionary Computation}, In press.
+
+\bibitem{chen2016xgboost}
+Tianqi Chen and Carlos Guestrin.
+\newblock Xgboost: A scalable tree boosting system.
+\newblock In {\em Proceedings of the 22nd acm sigkdd international conference
+  on knowledge discovery and data mining}, pages 785--794, 2016.
 
 \bibitem{da2010alineaga}
 Fernando Jos{\'e}~Mateus da~Silva, Juan Manuel~S{\'a}nchez P{\'e}rez, Juan
@@ -122,6 +134,14 @@ Francisco~M Ortu{\~n}o, Olga Valenzuela, Fernando Rojas, Hector Pomares,
   totally conserved columns.
 \newblock {\em Bioinformatics}, 29(17):2112--2121, 2013.
 
+\bibitem{rodriguez-fdez2015stac}
+Ismael Rodr\'{i}guez-Fdez, Adri\'{a}n Canosa, Manuel Mucientes, and Alberto
+  Bugar\'{i}n.
+\newblock {STAC}: a web platform for the comparison of algorithms using
+  statistical tests.
+\newblock In {\em Proceedings of the 2015 IEEE International Conference on
+  Fuzzy Systems (FUZZ-IEEE)}, 2015.
+
 \bibitem{rubio2018characteristic}
 {\'A}lvaro Rubio-Largo, Leonardo Vanneschi, Mauro Castelli, and Miguel~A
   Vega-Rodr{\'\i}guez.
@@ -162,11 +182,22 @@ Tandy Warnow.
   methods for phylogeny estimation}.
 \newblock Cambridge University Press, 2017.
 
+\bibitem{wheeler2007multiple}
+Travis~J Wheeler and John~D Kececioglu.
+\newblock Multiple alignment by aligning alignments.
+\newblock {\em Bioinformatics}, 23(13):i559--i568, 2007.
+
 \bibitem{zambrano2017comparing}
 Cristian Zambrano-Vega, Antonio~J Nebro, Jos{\'e} Garc{\'\i}a-Nieto, and
   Jos{\'e}~F Aldana-Montes.
 \newblock Comparing multi-objective metaheuristics for solving a
   three-objective formulation of multiple sequence alignment.
 \newblock {\em Progress in Artificial Intelligence}, pages 1--16, 2017.
+
+\bibitem{zhang2018astral}
+Chao Zhang, Maryam Rabiee, Erfan Sayyari, and Siavash Mirarab.
+\newblock Astral-iii: polynomial time species tree reconstruction from
+  partially resolved gene trees.
+\newblock {\em BMC bioinformatics}, 19(6):15--30, 2018.
 
 \end{thebibliography}
